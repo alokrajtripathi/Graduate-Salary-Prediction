@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graduate Salary Prediction</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+header {
+    background: linear-gradient(120deg, #172554, #2563eb);
+    color: white;
+    padding: 35px 8%;
+}
+
+header h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #dbeafe;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px #0000000d;
+}
+
+.card h2 {
+    color: #1d4ed8;
+    margin-bottom: 22px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 12px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #2563eb;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+button:disabled {
+    opacity: 0.6;
+}
+
+#result {
+    display: none;
+    background: #ecfdf5;
+    border: 1px solid #86efac;
+    padding: 30px;
+    text-align: center;
+    border-radius: 12px;
+    margin-top: 25px;
+}
+
+#result h2 {
+    color: #166534;
+}
+
+#salary {
+    font-size: 36px;
+    color: #15803d;
+    font-weight: bold;
+    margin: 18px;
+}
+
+#error {
+    display: none;
+    color: #dc2626;
+    background: #fef2f2;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #64748b;
+}
+
+@media(max-width: 750px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 450px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Graduate Salary Prediction</h1>
+    <p>AI-Powered Salary Prediction System Using Machine Learning</p>
+</header>
+
+<div class="container">
+
+<form id="predictionForm">
+
+<div class="card">
+<h2>Academic Information</h2>
+
+<div class="grid">
+
+<div>
+<label>10th Percentage</label>
+<input name="10percentage" type="number" step="any" value="85" required>
+</div>
+
+<div>
+<label>12th Percentage</label>
+<input name="12percentage" type="number" step="any" value="87" required>
+</div>
+
+<div>
+<label>10th Board</label>
+<input name="10board" value="cbse" required>
+</div>
+
+<div>
+<label>12th Board</label>
+<input name="12board" value="cbse" required>
+</div>
+
+<div>
+<label>12th Graduation Year</label>
+<input name="12graduation" type="number" value="2022" required>
+</div>
+
+<div>
+<label>College GPA</label>
+<input name="collegeGPA" type="number" step="any" value="8.2" required>
+</div>
+
+<div>
+<label>College Tier</label>
+<input name="CollegeTier" type="number" value="1" required>
+</div>
+
+<div>
+<label>College City Tier</label>
+<input name="CollegeCityTier" type="number" value="1" required>
+</div>
+
+<div>
+<label>Graduation Year</label>
+<input name="GraduationYear" type="number" value="2026" required>
+</div>
+
+<div>
+<label>Degree</label>
+<input name="Degree" value="B.Tech/B.E." required>
+</div>
+
+<div>
+<label>Specialization</label>
+<input name="Specialization" value="computer science & engineering" required>
+</div>
+
+<div>
+<label>College State</label>
+<input name="CollegeState" value="Punjab" required>
+</div>
+
+<div>
+<label>Gender</label>
+<select name="Gender" required>
+<option value="m">Male</option>
+<option value="f">Female</option>
+</select>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<h2>Technical Skills</h2>
+
+<div class="grid">
+
+<div>
+<label>English Score</label>
+<input name="English" type="number" value="85" required>
+</div>
+
+<div>
+<label>Logical Score</label>
+<input name="Logical" type="number" value="90" required>
+</div>
+
+<div>
+<label>Quantitative Score</label>
+<input name="Quant" type="number" value="75" required>
+</div>
+
+<div>
+<label>Domain Score</label>
+<input name="Domain" type="number" step="any" value="0.8" required>
+</div>
+
+<div>
+<label>Computer Programming</label>
+<input name="ComputerProgramming" type="number" value="400" required>
+</div>
+
+<div>
+<label>Computer Science</label>
+<input name="ComputerScience" type="number" value="400" required>
+</div>
+
+<div>
+<label>Electronics & Semiconductor</label>
+<input name="ElectronicsAndSemicon" type="number" value="0" required>
+</div>
+
+<div>
+<label>Mechanical Engineering</label>
+<input name="MechanicalEngg" type="number" value="0" required>
+</div>
+
+<div>
+<label>Electrical Engineering</label>
+<input name="ElectricalEngg" type="number" value="0" required>
+</div>
+
+<div>
+<label>Telecom Engineering</label>
+<input name="TelecomEngg" type="number" value="0" required>
+</div>
+
+<div>
+<label>Civil Engineering</label>
+<input name="CivilEngg" type="number" value="0" required>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<h2>Personality Traits</h2>
+
+<div class="grid">
+
+<div>
+<label>Conscientiousness</label>
+<input name="conscientiousness" type="number" step="any" value="0.5" required>
+</div>
+
+<div>
+<label>Agreeableness</label>
+<input name="agreeableness" type="number" step="any" value="0.5" required>
+</div>
+
+<div>
+<label>Extraversion</label>
+<input name="extraversion" type="number" step="any" value="0.5" required>
+</div>
+
+<div>
+<label>Neuroticism</label>
+<input name="nueroticism" type="number" step="any" value="-0.5" required>
+</div>
+
+<div>
+<label>Openness to Experience</label>
+<input name="openess_to_experience" type="number" step="any" value="0.5" required>
+</div>
+
+</div>
+</div>
+
+<button type="submit" id="predictBtn">
+Predict My Salary
+</button>
+
+</form>
+
+<div id="result">
+    <h2>Prediction Successful!</h2>
+    <p>Estimated Annual Salary</p>
+    <div id="salary"></div>
+    <p id="modelName"></p>
+    <p>Estimated result based on the trained Machine Learning model.</p>
+</div>
+
+<div id="error"></div>
+
+</div>
+
+<footer>
+    Graduate Salary Prediction System
+    <br><br>
+    Powered by FastAPI | Scikit-learn | Random Forest | MLflow
+</footer>
+
+<script>
+
+const form = document.getElementById("predictionForm");
+
+form.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const btn = document.getElementById("predictBtn");
+    const result = document.getElementById("result");
+    const errorBox = document.getElementById("error");
+
+    result.style.display = "none";
+    errorBox.style.display = "none";
+
+    btn.disabled = true;
+    btn.innerText = "Predicting...";
+
+    const features = {};
+
+    new FormData(form).forEach((value, key) => {
+
+        features[key] = form.elements[key].type === "number"
+            ? Number(value)
+            : value.trim();
+
+    });
+
+    try {
+
+        const response = await fetch("/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({features})
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                typeof data.detail === "string"
+                ? data.detail
+                : JSON.stringify(data.detail)
+            );
+        }
+
+        document.getElementById("salary").innerText =
+            "₹ " + Number(data.predicted_salary).toLocaleString("en-IN");
+
+        document.getElementById("modelName").innerText =
+            "Model Used: " + data.model;
+
+        result.style.display = "block";
+
+        result.scrollIntoView({behavior: "smooth"});
+
+    } catch(error) {
+
+        errorBox.innerText = "Prediction Error: " + error.message;
+        errorBox.style.display = "block";
+
+    } finally {
+
+        btn.disabled = false;
+        btn.innerText = "Predict My Salary";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
